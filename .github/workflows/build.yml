@@ -1,8 +1,9 @@
-name: Build
+name: Build, test and code analysis
 on:
   push:
     branches:
       - master
+      - develop
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
