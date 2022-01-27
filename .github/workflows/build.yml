@@ -19,6 +19,8 @@ jobs:
         with:
           dotnet-version: 6.0.x
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
         with:
