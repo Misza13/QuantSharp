@@ -25,7 +25,7 @@
             var putPrice = BlackScholesOptionsFunctions.EuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            putPrice.Should().BeApproximately(values.Put, 0.01);
+            putPrice.Should().BeApproximatelyS(values.Put, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -35,7 +35,7 @@
             var callDelta = BlackScholesOptionsFunctions.DeltaEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            callDelta.Should().BeApproximately(values.CallDelta, 0.0001);
+            callDelta.Should().BeApproximatelyS(values.CallDelta, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -45,7 +45,7 @@
             var putDelta = BlackScholesOptionsFunctions.DeltaEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            putDelta.Should().BeApproximately(values.PutDelta, 0.0001);
+            putDelta.Should().BeApproximatelyS(values.PutDelta, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -55,7 +55,7 @@
             var gamma = BlackScholesOptionsFunctions.GammaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            gamma.Should().BeApproximately(values.Gamma, 0.0001);
+            gamma.Should().BeApproximatelyS(values.Gamma, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -65,7 +65,7 @@
             var callTheta = BlackScholesOptionsFunctions.ThetaEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            callTheta.Should().BeApproximately(values.CallTheta, 0.01);
+            callTheta.Should().BeApproximatelyS(values.CallTheta, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -75,7 +75,7 @@
             var putTheta = BlackScholesOptionsFunctions.ThetaEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            putTheta.Should().BeApproximately(values.PutTheta, 0.01);
+            putTheta.Should().BeApproximatelyS(values.PutTheta, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -85,7 +85,17 @@
             var vega = BlackScholesOptionsFunctions.VegaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            vega.Should().BeApproximately(values.Vega, 0.01);
+            vega.Should().BeApproximatelyS(values.Vega, 4);
+        }
+
+        [TestCaseSource(nameof(OptionTestCaseGenerator))]
+        public void Vomma_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
+        {
+            //Act
+            var vomma = BlackScholesOptionsFunctions.VommaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            
+            //Assert
+            vomma.Should().BeApproximatelyS(values.Vomma, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -95,7 +105,7 @@
             var callRho = BlackScholesOptionsFunctions.RhoEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            callRho.Should().BeApproximately(values.CallRho, 0.01);
+            callRho.Should().BeApproximatelyS(values.CallRho, 4);
         }
 
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
@@ -105,7 +115,7 @@
             var putRho = BlackScholesOptionsFunctions.RhoEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
-            putRho.Should().BeApproximately(values.PutRho, 0.01);
+            putRho.Should().BeApproximatelyS(values.PutRho, 4);
         }
 
         public static IEnumerable<TestCaseData> OptionTestCaseGenerator()
@@ -122,16 +132,17 @@
                 },
                 new OptionValues
                 {
-                    Call = 12041.0948,
-                    Put = 9460.9291,
-                    CallDelta = 0.6208,
-                    PutDelta = -0.3792,
-                    Gamma = 0,
-                    CallTheta = -32.6271,
-                    PutTheta = -24.0765,
-                    Vega = 174.8889,
-                    CallRho = 141.5568,
-                    PutRho = -170.5423
+                    Call = 12041.09,
+                    Put = 9460.930,
+                    CallDelta = 0.620807,
+                    PutDelta = -0.37919,
+                    Gamma = 1.379794,
+                    CallTheta = -11908.9,
+                    PutTheta = -8787.91,
+                    Vega = 17488.89,
+                    Vomma = -1045.99,
+                    CallRho = 14155.68,
+                    PutRho = -17054.2,
                 });
 
             yield return new TestCaseData(
@@ -145,16 +156,17 @@
                 },
                 new OptionValues
                 {
-                    Call = 9.8524,
-                    Put = 9.0538,
-                    CallDelta = 0.5923,
-                    PutDelta = -0.4077,
-                    Gamma = 0.0162,
-                    CallTheta = -0.0137,
-                    PutTheta = -0.0115,
-                    Vega = 0.2329,
-                    CallRho = 0.2569,
-                    PutRho = -0.3351
+                    Call = 9.852414,
+                    Put = 9.053777,
+                    CallDelta = 0.592313,
+                    PutDelta = -0.40768,
+                    Gamma = 0.016175,
+                    CallTheta = -5.00276,
+                    PutTheta = -4.20946,
+                    Vega = 23.29281,
+                    Vomma = -2.26393,
+                    CallRho = 25.68639,
+                    PutRho = -33.5149,
                 });
 
             yield return new TestCaseData(
@@ -168,16 +180,17 @@
                 },
                 new OptionValues
                 {
-                    Call = 2138.2716,
-                    Put = 26.8003,
-                    CallDelta = 0.9667,
-                    PutDelta = -0.0333,
-                    Gamma = 0,
-                    CallTheta = -0.8314,
-                    PutTheta = -0.706,
-                    Vega = 1.6321,
-                    CallRho = 5.2879,
-                    PutRho = -0.4334
+                    Call = 2138.271,
+                    Put = 26.79995,
+                    CallDelta = 0.966690,
+                    PutDelta = -0.03330,
+                    Gamma = 4.215222,
+                    CallTheta = -303.444,
+                    PutTheta = -257.674,
+                    Vega = 163.2134,
+                    Vomma = 536.7141,
+                    CallRho = 528.7919,
+                    PutRho = -43.3402,
                 });
             
             yield return new TestCaseData(
@@ -191,16 +204,41 @@
                 },
                 new OptionValues
                 {
-                    Call = 0.559668,
+                    Call = 0.559660,
                     Put = 129.3112,
-                    CallDelta = 0.0277,
-                    PutDelta = -0.9723,
-                    Gamma = 0.0011,
-                    CallTheta = -0.019631,
-                    PutTheta = -0.005967,
-                    Vega = 0.1178,
-                    CallRho = 0.0242,
-                    PutRho = -1.2227
+                    CallDelta = 0.027701,
+                    PutDelta = -0.97229,
+                    Gamma = 0.001147,
+                    CallTheta = -7.16532,
+                    PutTheta = -2.17780,
+                    Vega = 11.78070,
+                    Vomma = 155.3978,
+                    CallRho = 2.422483,
+                    PutRho = -122.265,
+                });
+            
+            yield return new TestCaseData(
+                new OptionParameters
+                {
+                    S = 103,
+                    K = 100,
+                    T = 0.5,
+                    sigma = 0.15,
+                    r = 0.24
+                },
+                new OptionValues
+                {
+                    Call = 14.67116,
+                    Put = 0.363211,
+                    CallDelta = 0.928278,
+                    PutDelta = -0.07172,
+                    Gamma = 0.012521,
+                    CallTheta = -20.9204,
+                    PutTheta = 0.365643,
+                    Vega = 9.963268,
+                    Vomma = 131.8764,
+                    CallRho = 40.47074,
+                    PutRho = -3.87527,
                 });
         }
         
@@ -223,6 +261,7 @@
             public double CallTheta { get; set; }
             public double PutTheta { get; set; }
             public double Vega { get; set; }
+            public double Vomma { get; set; }
             public double CallRho { get; set; }
             public double PutRho { get; set; }
         }

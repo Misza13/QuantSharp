@@ -259,7 +259,7 @@ namespace QuantSharp
             double r)
         {
             var (_, dMinus) = DPlusMinus(S, K, T, sigma, r);
-            return -K * T * Math.Exp(-r * T) * Phi(-dMinus) / 100;
+            return -K * T * Math.Exp(-r * T) * Phi(-dMinus);
         }
 
         private static (double, double) DPlusMinus(double S, double K, double T, double sigma, double r)
