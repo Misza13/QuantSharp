@@ -6,7 +6,7 @@
     
     <PropertyGroup>
         <Version>0.0.2</Version>
-        <PackageReadmeFile>..\README.md</PackageReadmeFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,7 +14,7 @@
     </ItemGroup>
     
     <ItemGroup>
-        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>
