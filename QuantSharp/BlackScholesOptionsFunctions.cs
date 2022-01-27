@@ -4,6 +4,9 @@ namespace QuantSharp
     using System;
     using MathNet.Numerics.Distributions;
 
+    /// <summary>
+    /// Set of static functions for Black-Scholes model calculations for european-style options.
+    /// </summary>
     public static class BlackScholesOptionsFunctions
     {
         private static readonly Normal Normal01 = new Normal(0, 1);
