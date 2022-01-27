@@ -5,7 +5,7 @@
     </PropertyGroup>
     
     <PropertyGroup>
-        <Version>0.0.2</Version>
+        <Version>0.0.3</Version>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
