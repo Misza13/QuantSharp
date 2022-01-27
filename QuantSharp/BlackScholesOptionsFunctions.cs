@@ -114,12 +114,12 @@ namespace QuantSharp
         
         /// <summary>
         /// Theta of an european-style CALL option,
-        /// i.e. the derivative of the option's price with respect to passing of time.
+        /// i.e. the derivative of the option's price with respect to passage of time.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the derivative of option price
-        /// with respect to time. To get Theta value per the conventional understanding
-        /// ("per 1 day"), divide the result by 365.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to time.
+        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -140,12 +140,12 @@ namespace QuantSharp
         
         /// <summary>
         /// Theta of an european-style PUT option,
-        /// i.e. the derivative of the option's price with respect to passing of time.
+        /// i.e. the derivative of the option's price with respect to passage of time.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the derivative of option price
-        /// with respect to time. To get Theta value per the conventional understanding
-        /// ("per 1 day"), divide the result by 365.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to time.
+        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -169,9 +169,9 @@ namespace QuantSharp
         /// i.e. the derivative of option price with respect to volatility.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the derivative of option price
-        /// with respect to volatility. To get Vega value per the conventional understanding
-        /// ("per 1% of volatility change"), divide the result by 100.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to volatility.
+        /// To get Vega value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -195,9 +195,9 @@ namespace QuantSharp
         /// It reflects the convexity of Vega.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the second-order derivative of option price
-        /// with respect to volatility. To get Vomma value per the conventional understanding
-        /// ("per 1% of volatility change"), divide the result by 100.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the second-order derivative of option price with respect to volatility.
+        /// To get Vomma value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -220,9 +220,9 @@ namespace QuantSharp
         /// i.e. the derivative of option price with respect to risk-free interest rate.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the derivative of option price
-        /// with respect to risk-free rate. To get Rho value per the conventional understanding
-        /// ("per 1% of rate change"), divide the result by 100.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
+        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -245,9 +245,9 @@ namespace QuantSharp
         /// i.e. the derivative of option price with respect to risk-free interest rate.
         /// </summary>
         /// <remarks>
-        /// <b>Important:</b> The value returned is the proper value of the derivative of option price
-        /// with respect to risk-free rate. To get Rho value per the conventional understanding
-        /// ("per 1% of rate change"), divide the result by 100.
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
+        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
