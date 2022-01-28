@@ -5,7 +5,7 @@
         {
           "src": "../src",
           "files": [
-            "QuantSharp/bin/Debug/net6.0/QuantSharp.dll"
+            "**/QuantSharp/bin/Debug/net6.0/QuantSharp.dll"
           ]
         }
       ],
