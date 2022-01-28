@@ -1,11 +1,11 @@
-name: Publish to NuGet
+name: Publish NuGet & documentation
 on:
   push:
     branches:
       - master # Default release branch
 jobs:
-  publish:
-    name: build, pack & publish
+  build-pack-publish:
+    name: Build, pack & publish NuGet package
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -49,10 +49,29 @@ jobs:
           # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
           INCLUDE_SYMBOLS: true
 
-      - name: Build Documentation
-        uses: nikeee/docfx-action@v1.0.0
+  documentaion:
+    name: Build & publish documentation
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
         with:
-          args: docs/docfx.json
+          dotnet-version: 6.0.x
+      
+      - name: Install DocFX
+        uses: crazy-max/ghaction-chocolatey@v1
+        with:
+          args: install docfx
+      
+      - name: Install dependencies
+        run: dotnet restore src/QuantSharp.sln
+        
+      - name: Build Documentation
+        run: docfx docs/docfx.json
+        continue-on-error: false
             
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
