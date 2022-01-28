@@ -56,22 +56,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.x
-      
-      - name: Install DocFX
-        run: |
-          wget https://github.com/dotnet/docfx/releases/download/v2.59.0/docfx.zip
-          unzip docfx.zip -d docfx
-      
-      - name: Install dependencies
-        run: dotnet restore src/QuantSharp.sln
-        
       - name: Build Documentation
-        run: dotnet docfx/docfx.exe docs/docfx.json
-        continue-on-error: false
+        uses: nikeee/docfx-action@v1.0.0
+        working-directory: .
+        with:
+          args: docs/docfx.json
             
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
