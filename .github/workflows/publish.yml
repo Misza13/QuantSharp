@@ -1,14 +1,15 @@
-name: Publish to NuGet
+name: Publish NuGet & documentation
 on:
   push:
     branches:
       - master # Default release branch
 jobs:
-  publish:
-    name: build, pack & publish
+  build-pack-publish:
+    name: Build, pack & publish NuGet package
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v1
@@ -16,7 +17,6 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Publish to nuget.org
-        id: publish_nuget
         uses: alirezanet/publish-nuget@v3.0.0
         with:
           # Filepath of the project to be packaged, relative to root of repository
@@ -48,3 +48,31 @@ jobs:
 
           # Flag to toggle pushing symbols along with nuget package to the server, disabled by default
           INCLUDE_SYMBOLS: true
+
+  documentaion:
+    name: Build & publish documentation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0.x
+      
+      - name: Build project
+        run: dotnet build src/QuantSharp.sln -c Debug
+      
+      - name: Build Documentation
+        uses: nikeee/docfx-action@v1.0.0
+        with:
+          args: docs/docfx.json
+            
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          external_repository: quantsharp-docs/quantsharp-docs.github.io
+          publish_branch: master
+          publish_dir: docs/_site
