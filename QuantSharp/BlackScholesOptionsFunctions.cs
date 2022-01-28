@@ -282,15 +282,15 @@ namespace QuantSharp
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        /// <param name="V">Price of the option</param>
+        /// <param name="C">Price of the option</param>
         public static double ImpliedVolatilityEuroCall(
             double S,
             double K,
             double T,
             double r,
-            double V)
+            double C)
         {
-            double Price(double vol) => EuroCall(S, K, T, vol, r) - V;
+            double Price(double vol) => EuroCall(S, K, T, vol, r) - C;
             double DPriceDVol(double vol) => ThetaEuroCall(S, K, T, vol, r);
 
             return RobustNewtonRaphson.FindRoot(
@@ -313,15 +313,15 @@ namespace QuantSharp
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        /// <param name="V">Price of the option</param>
+        /// <param name="P">Price of the option</param>
         public static double ImpliedVolatilityEuroPut(
             double S,
             double K,
             double T,
             double r,
-            double V)
+            double P)
         {
-            double Price(double vol) => EuroPut(S, K, T, vol, r) - V;
+            double Price(double vol) => EuroPut(S, K, T, vol, r) - P;
             double DPriceDVol(double vol) => ThetaEuroPut(S, K, T, vol, r);
 
             return RobustNewtonRaphson.FindRoot(
