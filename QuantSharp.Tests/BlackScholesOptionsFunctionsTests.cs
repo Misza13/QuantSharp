@@ -118,6 +118,26 @@
             putRho.Should().BeApproximatelyS(values.PutRho, 4);
         }
 
+        [TestCaseSource(nameof(OptionTestCaseGenerator))]
+        public void CallImpliedVolatilityShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
+        {
+            //Act
+            var impVol = BlackScholesOptionsFunctions.ImpliedVolatilityEuroCall(parameters.S, parameters.K, parameters.T, parameters.r, values.Call);
+            
+            //Assert
+            impVol.Should().BeApproximatelyS(parameters.sigma, 4);
+        }
+
+        [TestCaseSource(nameof(OptionTestCaseGenerator))]
+        public void PutImpliedVolatilityShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
+        {
+            //Act
+            var impVol = BlackScholesOptionsFunctions.ImpliedVolatilityEuroPut(parameters.S, parameters.K, parameters.T, parameters.r, values.Put);
+            
+            //Assert
+            impVol.Should().BeApproximatelyS(parameters.sigma, 4);
+        }
+
         public static IEnumerable<TestCaseData> OptionTestCaseGenerator()
         {
             // Reference values calculated using https://option-price.com/index.php

@@ -3,6 +3,7 @@ namespace QuantSharp
 {
     using System;
     using MathNet.Numerics.Distributions;
+    using MathNet.Numerics.RootFinding;
 
     /// <summary>
     /// Set of static functions for Black-Scholes model calculations for european-style options.
@@ -267,6 +268,68 @@ namespace QuantSharp
         {
             var (_, dMinus) = DPlusMinus(S, K, T, sigma, r);
             return -K * T * Math.Exp(-r * T) * Phi(-dMinus);
+        }
+
+        /// <summary>
+        /// Calculate the annual implied volatility of an european CALL option given its price.
+        /// (Value is returned as fraction, e.g. 0.2 is 20% volatility.)
+        /// </summary>
+        /// <remarks>
+        /// Solves numerically using Newton-Raphson method.
+        /// Might fail if result would fall outside of 0-1000% range.
+        /// </remarks>
+        /// <param name="S">Price of the underlying instrument</param>
+        /// <param name="K">Strike price of the option</param>
+        /// <param name="T">Time to expiration (in years)</param>
+        /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <param name="V">Price of the option</param>
+        public static double ImpliedVolatilityEuroCall(
+            double S,
+            double K,
+            double T,
+            double r,
+            double V)
+        {
+            double Price(double vol) => EuroCall(S, K, T, vol, r) - V;
+            double DPriceDVol(double vol) => ThetaEuroCall(S, K, T, vol, r);
+
+            return RobustNewtonRaphson.FindRoot(
+                Price,
+                DPriceDVol,
+                0,
+                10.0,
+                0.00001);
+        }
+
+        /// <summary>
+        /// Calculate the annual implied volatility of an european PUT option given its price.
+        /// (Value is returned as fraction, e.g. 0.2 is 20% volatility.)
+        /// </summary>
+        /// <remarks>
+        /// Solves numerically using Newton-Raphson method.
+        /// Might fail if result would fall outside of 0-1000% range.
+        /// </remarks>
+        /// <param name="S">Price of the underlying instrument</param>
+        /// <param name="K">Strike price of the option</param>
+        /// <param name="T">Time to expiration (in years)</param>
+        /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <param name="V">Price of the option</param>
+        public static double ImpliedVolatilityEuroPut(
+            double S,
+            double K,
+            double T,
+            double r,
+            double V)
+        {
+            double Price(double vol) => EuroPut(S, K, T, vol, r) - V;
+            double DPriceDVol(double vol) => ThetaEuroPut(S, K, T, vol, r);
+
+            return RobustNewtonRaphson.FindRoot(
+                Price,
+                DPriceDVol,
+                0,
+                10.0,
+                0.00001);
         }
 
         private static (double, double) DPlusMinus(double S, double K, double T, double sigma, double r)
