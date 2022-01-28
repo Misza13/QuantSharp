@@ -6,11 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuantSharp.Tests", "QuantSh
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{DEAA857F-2015-4482-B38C-5BB4C6A84912}"
 	ProjectSection(SolutionItems) = preProject
-		.gitignore = .gitignore
-		LICENSE.md = LICENSE.md
-		.github\workflows\build.yml = .github\workflows\build.yml
-		README.md = README.md
-		.github\workflows\publish.yml = .github\workflows\publish.yml
+		.gitignore = ..\.gitignore
+		LICENSE.md = ..\LICENSE.md
+		build.yml = ..\.github\workflows\build.yml
+		publish.yml = ..\.github\workflows\publish.yml
 	EndProjectSection
 EndProject
 Global
