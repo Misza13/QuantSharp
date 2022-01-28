@@ -62,7 +62,7 @@ jobs:
           dotnet-version: 6.0.x
       
       - name: Build project
-        run: dotnet build src/QuantSharp.sln -c Release
+        run: dotnet build src/QuantSharp.sln -c Debug
       
       - name: Build Documentation
         uses: nikeee/docfx-action@v1.0.0
