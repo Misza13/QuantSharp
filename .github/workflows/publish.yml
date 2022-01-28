@@ -70,7 +70,7 @@ jobs:
         run: dotnet restore src/QuantSharp.sln
         
       - name: Build Documentation
-        run: dotnet run docfx/docfx.exe docs/docfx.json
+        run: dotnet docfx/docfx.exe docs/docfx.json
         continue-on-error: false
             
       - name: Deploy to GitHub Pages
