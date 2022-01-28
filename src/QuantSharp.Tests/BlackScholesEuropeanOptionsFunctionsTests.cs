@@ -6,13 +6,13 @@
     using QuantSharp;
 
     [TestFixture]
-    public class BlackScholesOptionsFunctionsTests
+    public class BlackScholesEuropeanOptionsFunctionsTests
     {
         [TestCaseSource(nameof(OptionTestCaseGenerator))]
         public void CallPrice_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var callPrice = BlackScholesOptionsFunctions.EuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var callPrice = BlackScholesEuropeanOptionsFunctions.CallPrice(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
 
             //Test
             callPrice.Should().BeApproximatelyS(values.Call, 4);
@@ -22,7 +22,7 @@
         public void PutPrice_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var putPrice = BlackScholesOptionsFunctions.EuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var putPrice = BlackScholesEuropeanOptionsFunctions.PutPrice(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             putPrice.Should().BeApproximatelyS(values.Put, 4);
@@ -32,7 +32,7 @@
         public void CallDelta_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var callDelta = BlackScholesOptionsFunctions.DeltaEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var callDelta = BlackScholesEuropeanOptionsFunctions.CallDelta(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             callDelta.Should().BeApproximatelyS(values.CallDelta, 4);
@@ -42,7 +42,7 @@
         public void PutDelta_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var putDelta = BlackScholesOptionsFunctions.DeltaEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var putDelta = BlackScholesEuropeanOptionsFunctions.PutDelta(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             putDelta.Should().BeApproximatelyS(values.PutDelta, 4);
@@ -52,7 +52,7 @@
         public void Gamma_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var gamma = BlackScholesOptionsFunctions.GammaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var gamma = BlackScholesEuropeanOptionsFunctions.Gamma(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             gamma.Should().BeApproximatelyS(values.Gamma, 4);
@@ -62,7 +62,7 @@
         public void CallTheta_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var callTheta = BlackScholesOptionsFunctions.ThetaEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var callTheta = BlackScholesEuropeanOptionsFunctions.CallTheta(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             callTheta.Should().BeApproximatelyS(values.CallTheta, 4);
@@ -72,7 +72,7 @@
         public void PutTheta_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var putTheta = BlackScholesOptionsFunctions.ThetaEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var putTheta = BlackScholesEuropeanOptionsFunctions.PutTheta(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             putTheta.Should().BeApproximatelyS(values.PutTheta, 4);
@@ -82,7 +82,7 @@
         public void Vega_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var vega = BlackScholesOptionsFunctions.VegaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var vega = BlackScholesEuropeanOptionsFunctions.Vega(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             vega.Should().BeApproximatelyS(values.Vega, 4);
@@ -92,7 +92,7 @@
         public void Vomma_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var vomma = BlackScholesOptionsFunctions.VommaEuro(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var vomma = BlackScholesEuropeanOptionsFunctions.Vomma(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             vomma.Should().BeApproximatelyS(values.Vomma, 4);
@@ -102,7 +102,7 @@
         public void CallRho_ShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var callRho = BlackScholesOptionsFunctions.RhoEuroCall(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var callRho = BlackScholesEuropeanOptionsFunctions.CallRho(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             callRho.Should().BeApproximatelyS(values.CallRho, 4);
@@ -112,7 +112,7 @@
         public void PutRhoShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var putRho = BlackScholesOptionsFunctions.RhoEuroPut(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
+            var putRho = BlackScholesEuropeanOptionsFunctions.PutRho(parameters.S, parameters.K, parameters.T, parameters.sigma, parameters.r);
             
             //Assert
             putRho.Should().BeApproximatelyS(values.PutRho, 4);
@@ -122,7 +122,7 @@
         public void CallImpliedVolatilityShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var impVol = BlackScholesOptionsFunctions.ImpliedVolatilityEuroCall(parameters.S, parameters.K, parameters.T, parameters.r, values.Call);
+            var impVol = BlackScholesEuropeanOptionsFunctions.CallImpliedVolatility(parameters.S, parameters.K, parameters.T, parameters.r, values.Call);
             
             //Assert
             impVol.Should().BeApproximatelyS(parameters.sigma, 4);
@@ -132,7 +132,7 @@
         public void PutImpliedVolatilityShouldHaveCorrectValue(OptionParameters parameters, OptionValues values)
         {
             //Act
-            var impVol = BlackScholesOptionsFunctions.ImpliedVolatilityEuroPut(parameters.S, parameters.K, parameters.T, parameters.r, values.Put);
+            var impVol = BlackScholesEuropeanOptionsFunctions.PutImpliedVolatility(parameters.S, parameters.K, parameters.T, parameters.r, values.Put);
             
             //Assert
             impVol.Should().BeApproximatelyS(parameters.sigma, 4);
