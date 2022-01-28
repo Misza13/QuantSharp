@@ -8,7 +8,7 @@ namespace QuantSharp
     /// <summary>
     /// Set of static functions for Black-Scholes model calculations for european-style options.
     /// </summary>
-    public static class BlackScholesOptionsFunctions
+    public static class BlackScholesEuropeanOptionsFunctions
     {
         private static readonly Normal Normal01 = new Normal(0, 1);
         
@@ -20,7 +20,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double EuroCall(
+        public static double CallPrice(
             double S,
             double K,
             double T,
@@ -40,7 +40,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double EuroPut(
+        public static double PutPrice(
             double S,
             double K,
             double T,
@@ -61,7 +61,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double DeltaEuroCall(
+        public static double CallDelta(
             double S,
             double K,
             double T,
@@ -81,7 +81,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double DeltaEuroPut(
+        public static double PutDelta(
             double S,
             double K,
             double T,
@@ -102,7 +102,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double GammaEuro(
+        public static double Gamma(
             double S,
             double K,
             double T,
@@ -129,7 +129,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double ThetaEuroCall(
+        public static double CallTheta(
             double S,
             double K,
             double T,
@@ -157,7 +157,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double ThetaEuroPut(
+        public static double PutTheta(
             double S,
             double K,
             double T,
@@ -183,7 +183,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double VegaEuro(
+        public static double Vega(
             double S,
             double K,
             double T,
@@ -209,7 +209,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double VommaEuro(
+        public static double Vomma(
             double S,
             double K,
             double T,
@@ -234,7 +234,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double RhoEuroCall(
+        public static double CallRho(
             double S,
             double K,
             double T,
@@ -259,7 +259,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
-        public static double RhoEuroPut(
+        public static double PutRho(
             double S,
             double K,
             double T,
@@ -283,15 +283,15 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
         /// <param name="C">Price of the option</param>
-        public static double ImpliedVolatilityEuroCall(
+        public static double CallImpliedVolatility(
             double S,
             double K,
             double T,
             double r,
             double C)
         {
-            double Price(double vol) => EuroCall(S, K, T, vol, r) - C;
-            double DPriceDVol(double vol) => ThetaEuroCall(S, K, T, vol, r);
+            double Price(double vol) => CallPrice(S, K, T, vol, r) - C;
+            double DPriceDVol(double vol) => CallTheta(S, K, T, vol, r);
 
             return RobustNewtonRaphson.FindRoot(
                 Price,
@@ -314,15 +314,15 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
         /// <param name="P">Price of the option</param>
-        public static double ImpliedVolatilityEuroPut(
+        public static double PutImpliedVolatility(
             double S,
             double K,
             double T,
             double r,
             double P)
         {
-            double Price(double vol) => EuroPut(S, K, T, vol, r) - P;
-            double DPriceDVol(double vol) => ThetaEuroPut(S, K, T, vol, r);
+            double Price(double vol) => PutPrice(S, K, T, vol, r) - P;
+            double DPriceDVol(double vol) => PutTheta(S, K, T, vol, r);
 
             return RobustNewtonRaphson.FindRoot(
                 Price,

@@ -3,6 +3,9 @@
 Eventually, it will contain a plethora of functions for calculating various aspect of financial instruments.
 For start, we will implement calculations for vanilla european-style options using the Black-Scholes model.
 
+**Note**: QuantSharp is currently in pre-release status and APIs can be expected to break without regard for semantic versioning
+(a bump in minor version usually signifies an actually major change).
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Misza13_QuantSharp&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Misza13_QuantSharp)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Misza13_QuantSharp&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Misza13_QuantSharp)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Misza13_QuantSharp&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Misza13_QuantSharp)
