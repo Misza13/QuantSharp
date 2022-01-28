@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+// ReSharper disable InconsistentNaming
 namespace QuantSharp
 {
     using System;
@@ -121,8 +121,8 @@ namespace QuantSharp
         /// <b>Important:</b>
         /// The value returned is the raw value of the derivative of option price with respect to time.
         /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
-        /// Additionally, the value will be <b>positive</b> for long positions because as time moves forward
-        /// <see cref="T"/> decreases, therefore conventional understanding of Theta requires multiplication by -1.
+        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
+        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
@@ -149,8 +149,8 @@ namespace QuantSharp
         /// <b>Important:</b>
         /// The value returned is the raw value of the derivative of option price with respect to time.
         /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
-        /// Additionally, the value will be <b>positive</b> for long positions because as time moves forward
-        /// <see cref="T"/> decreases, therefore conventional understanding of Theta requires multiplication by -1.
+        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
+        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
         /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
