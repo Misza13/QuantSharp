@@ -25,7 +25,7 @@
   * Uncommon greeks: Vomma
   * Implied volatility
 
-To read full API documentation, see: https://quant-sharp.github.io/
+To read full API documentation, see: https://quantsharp-docs.github.io/
 
 ### Roadmap for 1.0 release
 
