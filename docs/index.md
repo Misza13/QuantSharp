@@ -25,7 +25,7 @@ using QuantSharp;
 
 //...
 
-var callOptionPrice = BlackScholesOptionsFunctions.EuroCall(
+var callOptionPrice = BlackScholesEuropeanOptionsFunctions.CallPrice(
     234.56, //Price of underlying
     210.00, //Strike price
     0.25, //Time to expiration (in years, i.e. 3 months here)

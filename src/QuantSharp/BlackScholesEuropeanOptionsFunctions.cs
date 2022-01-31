@@ -20,6 +20,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>The option's price</returns>
         public static double CallPrice(
             double S,
             double K,
@@ -40,6 +41,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>The option's price</returns>
         public static double PutPrice(
             double S,
             double K,
@@ -61,6 +63,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>The option's delta</returns>
         public static double CallDelta(
             double S,
             double K,
@@ -81,6 +84,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>The option's delta</returns>
         public static double PutDelta(
             double S,
             double K,
@@ -102,6 +106,7 @@ namespace QuantSharp
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>The option's gamma</returns>
         public static double Gamma(
             double S,
             double K,
@@ -117,18 +122,20 @@ namespace QuantSharp
         /// Theta of an european-style CALL option,
         /// i.e. the derivative of the option's price with respect to passage of time.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the derivative of option price with respect to time.
-        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
-        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
-        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's theta.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value is the raw value of the derivative of option price with respect to time.
+        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
+        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
+        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
+        /// </returns>
         public static double CallTheta(
             double S,
             double K,
@@ -145,18 +152,20 @@ namespace QuantSharp
         /// Theta of an european-style PUT option,
         /// i.e. the derivative of the option's price with respect to passage of time.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the derivative of option price with respect to time.
-        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
-        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
-        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's theta.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value is the raw value of the derivative of option price with respect to time.
+        /// To get Theta value per the conventional definition ("decay per 1 day"), divide the result by 365.
+        /// Additionally, the value will be <b>positive</b> for long positions because T decreases
+        /// as time moves forward, therefore conventional understanding of Theta requires multiplication by -1.
+        /// </returns>
         public static double PutTheta(
             double S,
             double K,
@@ -173,16 +182,18 @@ namespace QuantSharp
         /// Vega of an european-style option (same for CALL and PUT),
         /// i.e. the derivative of option price with respect to volatility.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the derivative of option price with respect to volatility.
-        /// To get Vega value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's vega.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value is the raw value of the derivative of option price with respect to volatility.
+        /// To get Vega value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
+        /// </returns>
         public static double Vega(
             double S,
             double K,
@@ -199,16 +210,18 @@ namespace QuantSharp
         /// i.e. the second-order derivative of option price with respect to volatility.
         /// It reflects the convexity of Vega.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the second-order derivative of option price with respect to volatility.
-        /// To get Vomma value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's Vomma.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value is the raw value of the second-order derivative of option price with respect to volatility.
+        /// To get Vomma value per the conventional definition ("per 1% of volatility change"), divide the result by 100.
+        /// </returns>
         public static double Vomma(
             double S,
             double K,
@@ -224,16 +237,18 @@ namespace QuantSharp
         /// Rho of an european-style CALL option,
         /// i.e. the derivative of option price with respect to risk-free interest rate.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
-        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's rho.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
+        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
+        /// </returns>
         public static double CallRho(
             double S,
             double K,
@@ -249,16 +264,18 @@ namespace QuantSharp
         /// Rho of an european-style PUT option,
         /// i.e. the derivative of option price with respect to risk-free interest rate.
         /// </summary>
-        /// <remarks>
-        /// <b>Important:</b>
-        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
-        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="sigma">Annual volatility of the underlying instrument (as fraction, e.g. 20% is 0.2)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
+        /// <returns>
+        /// The option's rho.
+        /// <br/>
+        /// <b>Important:</b>
+        /// The value returned is the raw value of the derivative of option price with respect to risk-free rate.
+        /// To get Rho value per the conventional definition ("per 1% of rate change"), divide the result by 100.
+        /// </returns>
         public static double PutRho(
             double S,
             double K,
@@ -274,15 +291,16 @@ namespace QuantSharp
         /// Calculate the annual implied volatility of an european CALL option given its price.
         /// (Value is returned as fraction, e.g. 0.2 is 20% volatility.)
         /// </summary>
-        /// <remarks>
-        /// Solves numerically using Newton-Raphson method.
-        /// Might fail if result would fall outside of 0-1000% range.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
         /// <param name="C">Price of the option</param>
+        /// <returns>Implied volatility of the option</returns>
+        /// <remarks>
+        /// Solves numerically using Newton-Raphson method.
+        /// Might fail if result would fall outside of 0-1000% range.
+        /// </remarks>
         public static double CallImpliedVolatility(
             double S,
             double K,
@@ -305,15 +323,16 @@ namespace QuantSharp
         /// Calculate the annual implied volatility of an european PUT option given its price.
         /// (Value is returned as fraction, e.g. 0.2 is 20% volatility.)
         /// </summary>
-        /// <remarks>
-        /// Solves numerically using Newton-Raphson method.
-        /// Might fail if result would fall outside of 0-1000% range.
-        /// </remarks>
         /// <param name="S">Price of the underlying instrument</param>
         /// <param name="K">Strike price of the option</param>
         /// <param name="T">Time to expiration (in years)</param>
         /// <param name="r">Risk-free interest rate (as fraction, e.g. 5% is 0.05)</param>
         /// <param name="P">Price of the option</param>
+        /// <returns>Implied volatility of the option</returns>
+        /// <remarks>
+        /// Solves numerically using Newton-Raphson method.
+        /// Might fail if result would fall outside of 0-1000% range.
+        /// </remarks>
         public static double PutImpliedVolatility(
             double S,
             double K,
